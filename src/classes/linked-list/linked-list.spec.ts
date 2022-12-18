@@ -359,4 +359,30 @@ describe('LinkedList', () => {
       });
     });
   });
+
+  describe('toString', () => {
+    describe('Given an empty linkedList, when call the method "toString"', () => {
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        expect(linkedList.length).to.be.equal(0);
+      });
+
+      it('Should return an empty string', () => {
+        expect(linkedList.toString()).to.be.equal('');
+      });
+    });
+
+    describe('Given a linkedList with 3 elements, when call the method "toString"', () => {
+      const elements = [1, 2, 3, 4, 5];
+
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        elements.forEach(element => linkedList.push(element));
+      });
+
+      it('Should return all elements separated by ","', () => {
+        expect(linkedList.toString()).to.be.equal('1,2,3,4,5');
+      });
+    });
+  });
 });

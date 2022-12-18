@@ -104,4 +104,25 @@ export class LinkedList<T> implements List<T> {
   remove(element: T): boolean {
     return !!this.removeAt(this.indexOf(element));
   }
+
+  toString(): string {
+    if (this.isEmpty) {
+      return '';
+    }
+
+    let resultString = '';
+    let currentNode = this.head;
+
+    for (let currentIndex = 0; currentIndex < this.length && !!currentNode; currentIndex++) {
+      resultString = resultString ? `${resultString},${currentNode.element}` : String(currentNode.element);
+
+      currentNode = currentNode.next;
+    }
+
+    return resultString;
+  }
+
+  get isEmpty(): boolean {
+    return !this.length;
+  }
 }
