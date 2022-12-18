@@ -156,6 +156,76 @@ describe('LinkedList', () => {
     });
   });
 
+  describe('removeAt', () => {
+    let removedElement: any;
+
+    describe('Given an empty linkedList', () => {
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        expect(linkedList.length).to.be.equal(0);
+      });
+
+      describe('When try to remove an element in any position', () => {
+        beforeEach(() => {
+          removedElement = linkedList.removeAt(-1);
+        });
+
+        it('Should return undefined', () => {
+          expect(linkedList.removeAt(-1)).to.be.undefined;
+          expect(linkedList.removeAt(0)).to.be.undefined;
+          expect(linkedList.removeAt(1)).to.be.undefined;
+        });
+      });
+    });
+
+    describe('Given a linkedList with 3 elements', () => {
+      const originalElements = [1, 2, 3, 4, 5];
+
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        originalElements.forEach(element => linkedList.push(element));
+        expect(linkedList.length).to.be.equal(originalElements.length);
+      });
+
+      describe('When try to remove an element in an index equal the size of list', () => {
+        it('Should not remove any element and return undefined', () => {
+          expect(linkedList.removeAt(originalElements.length)).to.be.undefined;
+          expect(linkedList.length).to.be.equal(originalElements.length);
+        });
+      });
+
+      describe('When remove an element in first index', () => {
+        beforeEach(() => {
+          removedElement = linkedList.removeAt(0);
+        });
+
+        it('Should descrease the size of list', () => {
+          expect(linkedList.length).to.be.equal(originalElements.length - 1);
+        });
+
+        it('Should return the removed element', () => {
+          expect(removedElement).to.be.equal(originalElements[0]);
+        });
+      });
+
+      describe('When remove an element in another valid index', () => {
+        const indexToRemove = 2;
+
+        beforeEach(() => {
+          removedElement = linkedList.removeAt(indexToRemove);
+        });
+
+        it('Should descrease the size of list', () => {
+          expect(linkedList.length).to.be.equal(originalElements.length - 1);
+        });
+
+        it('Should return the removed element', () => {
+          expect(removedElement).to.be.equal(originalElements[indexToRemove]);
+        });
+      });
+    });
+  });
+
   describe('indexOf', () => {
     let index: number;
 
@@ -176,7 +246,7 @@ describe('LinkedList', () => {
       });
     });
 
-    describe('Given a linkedList with 3 diferent simple elements', () => {
+    describe('Given a linkedList with 3 different simple elements', () => {
       const elements = [1, 2, 3];
 
       beforeEach(() => {
@@ -220,6 +290,71 @@ describe('LinkedList', () => {
 
         it('Should return the index of each element ', () => {
           expect(linkedList.indexOf(repeatedElement)).to.be.equal(expectedIndexOfRepeatedElement);
+        });
+      });
+    });
+  });
+
+  describe('remove', () => {
+    let isElementRemoved: boolean;
+
+    describe('Given an empty linkedList', () => {
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        expect(linkedList.length).to.be.equal(0);
+      });
+
+      describe('When try remove any element', () => {
+        beforeEach(() => {
+          isElementRemoved = linkedList.remove(123);
+        });
+
+        it('Should return false', () => {
+          expect(linkedList.length).to.be.equal(0);
+          expect(isElementRemoved).to.be.equal(false);
+        });
+      });
+    });
+
+    describe('Given a linkedList with 3 different elements', () => {
+      const originalElements = [1, 2, 3];
+
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        originalElements.forEach(element => linkedList.push(element));
+      });
+
+      describe('When remove a non-existent element', () => {
+        const nonExistentElement = 4;
+
+        beforeEach(() => {
+          isElementRemoved = linkedList.remove(nonExistentElement);
+          expect(linkedList.indexOf(nonExistentElement)).to.be.equal(-1);
+        });
+
+        it('Should return false', () => {
+          expect(isElementRemoved).to.be.equal(false);
+        });
+
+        it('Should not remove the element', () => {
+          expect(linkedList.length).to.be.equal(originalElements.length);
+        });
+      });
+
+      describe('When remove an existent element', () => {
+        const existentElement = 3;
+
+        beforeEach(() => {
+          isElementRemoved = linkedList.remove(existentElement);
+        });
+
+        it('Should return true', () => {
+          expect(isElementRemoved).to.be.equal(true);
+        });
+
+        it('Should remove the element', () => {
+          expect(linkedList.length).to.be.equal(originalElements.length - 1);
+          expect(linkedList.indexOf(existentElement)).to.be.equal(-1);
         });
       });
     });

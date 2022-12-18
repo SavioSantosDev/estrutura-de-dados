@@ -100,4 +100,8 @@ export class LinkedList<T> implements List<T> {
 
     return -1;
   }
+
+  remove(element: T): boolean {
+    return !!this.removeAt(this.indexOf(element));
+  }
 }
