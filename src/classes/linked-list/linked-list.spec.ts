@@ -5,11 +5,11 @@ import { LinkedList } from './linked-list';
 describe('LinkedList', () => {
   let linkedList: LinkedList<number>;
 
-  const firstElement = 1;
-  const secondElement = 2;
-  const thirdElement = 3;
-
   describe('push', () => {
+    const firstElement = 1;
+    const secondElement = 2;
+    const thirdElement = 3;
+
     describe('Given an empty linkedList', () => {
       beforeEach(() => {
         linkedList = new LinkedList();
@@ -53,6 +53,8 @@ describe('LinkedList', () => {
   });
 
   describe('insertAt', () => {
+    const element = 1;
+
     let isElementInserted: boolean;
 
     describe('Given an empty linkedList', () => {
@@ -63,7 +65,7 @@ describe('LinkedList', () => {
 
       describe('When try to insert a element in an index less than 0', () => {
         beforeEach(() => {
-          isElementInserted = linkedList.insertAt(firstElement, -1);
+          isElementInserted = linkedList.insertAt(element, -1);
         });
 
         it('Should not add element', () => {
@@ -74,7 +76,7 @@ describe('LinkedList', () => {
 
       describe('When try insert a element in an index greater than 0', () => {
         beforeEach(() => {
-          isElementInserted = linkedList.insertAt(firstElement, 1);
+          isElementInserted = linkedList.insertAt(element, 1);
         });
 
         it('Should not add element', () => {
@@ -85,7 +87,7 @@ describe('LinkedList', () => {
 
       describe('When insert an element in the index 0', () => {
         beforeEach(() => {
-          isElementInserted = linkedList.insertAt(firstElement, 0);
+          isElementInserted = linkedList.insertAt(element, 0);
         });
 
         it('Should add the element', () => {
@@ -165,11 +167,7 @@ describe('LinkedList', () => {
         expect(linkedList.length).to.be.equal(0);
       });
 
-      describe('When try to remove an element in any position', () => {
-        beforeEach(() => {
-          removedElement = linkedList.removeAt(-1);
-        });
-
+      describe('When trying to remove an element at an index equal to the length of the list', () => {
         it('Should return undefined', () => {
           expect(linkedList.removeAt(-1)).to.be.undefined;
           expect(linkedList.removeAt(0)).to.be.undefined;
