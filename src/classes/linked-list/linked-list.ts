@@ -87,4 +87,17 @@ export class LinkedList<T> implements List<T> {
 
     return currentNode.element;
   }
+
+  indexOf(element: T): number {
+    let currentNode = this.head;
+
+    for (let currentIndex = 0; currentIndex < this.length && !!currentNode; currentIndex++) {
+      if (element === currentNode.element) {
+        return currentIndex;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return -1;
+  }
 }

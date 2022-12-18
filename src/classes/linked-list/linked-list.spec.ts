@@ -155,4 +155,73 @@ describe('LinkedList', () => {
       });
     });
   });
+
+  describe('indexOf', () => {
+    let index: number;
+
+    describe('Given an empty linkedList', () => {
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        expect(linkedList.length).to.be.equal(0);
+      });
+
+      describe('When get "indexOf" any element', () => {
+        beforeEach(() => {
+          index = linkedList.indexOf(123);
+        });
+
+        it('Should return -1', () => {
+          expect(index).to.be.equal(-1);
+        });
+      });
+    });
+
+    describe('Given a linkedList with 3 diferent simple elements', () => {
+      const elements = [1, 2, 3];
+
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        elements.forEach(element => linkedList.push(element));
+      });
+
+      describe('When get the "indexOf" a non-existent element', () => {
+        beforeEach(() => {
+          index = linkedList.indexOf(123);
+        });
+
+        it('Should return -1', () => {
+          expect(index).to.be.equal(-1);
+        });
+      });
+
+      describe('When get the "indexOf" the elements', () => {
+        it('Should return the index of each element ', () => {
+          expect(linkedList.indexOf(elements[0])).to.be.equal(0);
+          expect(linkedList.indexOf(elements[1])).to.be.equal(1);
+          expect(linkedList.indexOf(elements[2])).to.be.equal(2);
+        });
+      });
+    });
+
+    describe('Given a linkedList with 3 equal elements', () => {
+      const repeatedElement = 3;
+      const elements = [1, 2, repeatedElement, repeatedElement, repeatedElement];
+      const expectedIndexOfRepeatedElement = 2;
+
+      beforeEach(() => {
+        linkedList = new LinkedList();
+        elements.forEach(element => linkedList.push(element));
+      });
+
+      describe('When get the "indexOf" the element', () => {
+        beforeEach(() => {
+          index = linkedList.indexOf(repeatedElement);
+        });
+
+        it('Should return the index of each element ', () => {
+          expect(linkedList.indexOf(repeatedElement)).to.be.equal(expectedIndexOfRepeatedElement);
+        });
+      });
+    });
+  });
 });
